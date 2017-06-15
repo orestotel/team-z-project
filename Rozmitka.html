@@ -1,0 +1,231 @@
+<html>
+<body id = "body">
+	<canvas id="c"></canvas>
+	<div id="div">
+    <button onclick="changer(1)" id="b1">1</button>
+	<button onclick="changer(2)" id="b2">2</button>
+	<button onclick="changer(3)" id="b3">3</button>
+	<button onclick="changer(4)" id="b4">4</button>
+	<button onclick="changer(5)" id="b5">5</button>
+	<button onclick="changer(6)" id="b6">6</button>
+	<button onclick="changer(7)" id="b7">7</button>
+	<button onclick="changer(8)" id="b8">8</button>
+	<button onclick="changer(9)" id="b9">9</button>
+	<button onclick="changer(10)" id="b10">10</button>
+		<button onclick="clicker()" id="clicker">Beg goverment for financing(+1K)</button>
+	</div>
+	<style>
+		canvas{
+			position:inherit;
+		}
+		button{
+			position:absolute;
+			height:27;
+			width:60;
+		}
+		#b1{left:158;
+			bottom:807;
+		}
+	    #b2{left:158;
+			bottom:775;
+		}
+	    #b3{left:158;
+			bottom:743;
+		}
+	    #b4{left:158;
+			bottom:712;
+		}
+	    #b5{left:158;
+			bottom:680;
+		}
+	    #b6{left:158;
+			bottom:648;
+		}
+	    #b7{left:158;
+			bottom:616;
+		}
+	    #b8{left:158;
+			bottom:584;
+		}
+	    #b9{left:158;
+			bottom:552;
+		}
+	    #b10{left:158;
+			bottom:520;
+		}
+		#clicker{
+			left:158;
+			bottom: 850;
+			height: 60;
+			width:200;
+		}
+	</style>
+	<script>
+		
+	var c = document.getElementById("c")
+	var ctx = c.getContext("2d")
+	c.width = 1500
+	c.height = 1000
+	var moneyCount = 100
+	var xL = 50
+	var yL = 409
+	var iL = 0
+	var count = 1000
+	var buttonCondition = [0,0,0,0,0,0,0,0,0,0]
+	var stolenCount = -moneyCount
+	//клікер(гроші)
+	
+	function clicker(){
+		moneyCount++;
+		draw();
+		ctx.clearRect(39,105,22,30);
+	}
+	
+	//зміна кольору кнопок
+	function changer(n){
+		if(moneyCount>0){
+			if(buttonCondition[n]<1){
+		moneyCount = moneyCount - 50;
+		
+		buttonCondition[n] = 1;
+		console.log(buttonCondition[n])
+		
+				buttonId = "b"+n;
+document.getElementById(buttonId).style.backgroundColor = "#AA0000";
+		
+		
+		}
+		}
+		if(moneyCount<0){
+			var ggTimer = 11
+			var gameOver = setInterval(function(){
+				ctx.strokeStyle = "red";
+				ctx.font = "20px Consolas";
+			ggTimer--;
+				if(ggTimer<1){
+				    document.getElementById("b1").remove();
+					 document.getElementById("b2").remove();
+					 document.getElementById("b3").remove();
+					 document.getElementById("b4").remove();
+					 document.getElementById("b5").remove();
+					 document.getElementById("b6").remove();
+					 document.getElementById("b7").remove();
+					 document.getElementById("b8").remove();
+					 document.getElementById("b9").remove();
+					 document.getElementById("b10").remove();
+					document.getElementById("clicker").remove();
+					//зупинка всіх інтервалів
+					clearInterval(carLeft);
+					var gameOverScreen = setInterval(function(){					
+					ctx.clearRect(0,0,1500,1000);
+					ctx.strokeStyle = "black";
+					ctx.font = "20px Arial";
+					stolenCount = -moneyCount;
+					ctx.strokeText("Sadovyi publicly said that you steal money from budjet for personal purposes.",50,50);
+					ctx.font = "50px Arial";
+					ctx.strokeText("You are a prisoner for stealing "+stolenCount+"K$ from budjet",50,100)},1)
+
+					
+				}if(ggTimer>0){
+				ctx.clearRect(300,300,400,400);
+				ctx.strokeText("You are in debt!",300,300);
+				ctx.strokeText("Pay off your loan in "+ggTimer+" seconds",300,400);
+				ctx.strokeText("Or you will go to JAIL",300,500);
+				}
+				if(moneyCount>0){
+					
+					clearInterval(gameOver);
+				}
+			},1000)
+		}
+		draw();
+		ctx.clearRect(39,100,22,30);
+	}
+
+	function draw(){
+ctx.clearRect(0,0,1000,1000);
+		
+		ctx.strokeStyle = "black";
+		ctx.fillStyle = "black";
+		//квадратик '$ Money $'
+		ctx.rect(20,25,120,30);
+		
+		//квадратик moneyCount
+		ctx.rect(20,55,120,30);
+		
+		//ліва дорога
+		ctx.rect(20,100,60,320);
+		
+		//права дорога
+		ctx.rect(80,100,60,320);
+		
+		//маленькі квадратики
+		ctx.rect(150,102,60,27);
+		ctx.rect(150,134,60,27);
+		ctx.rect(150,166,60,27);
+		ctx.rect(150,197,60,27);
+		ctx.rect(150,229,60,27);
+		ctx.rect(150,261,60,27);
+		ctx.rect(150,293,60,27);
+		ctx.rect(150,325,60,27);
+		ctx.rect(150,357,60,27);
+		ctx.rect(150,389,60,27);
+		ctx.stroke();
+		
+		
+		// тексти
+				ctx.font = "10px Arial";
+		ctx.strokeText("↓ buy  police posts" ,150,97);	
+		ctx.font = " 23px Arial";
+
+
+		ctx.strokeStyle = "green";
+		
+        ctx.strokeText("$ Money $",27,47);
+		ctx.strokeStyle = "#42f4aa";
+		ctx.strokeText(moneyCount+"K",27,78);
+		ctx.fillStyle = "DarkOrange";
+
+	}
+draw();
+	
+var carLeft = setInterval(	function(){
+
+if(iL <1){
+ctx.clearRect(39,100,22,30);
+ctx.clearRect(xL-11,yL-10,22,30);
+ctx.strokeStyle = "black";
+ctx.rect(20,100,60,320);
+ctx.rect(80,100,60,320);
+ctx.stroke();
+ctx.beginPath();
+ctx.arc(xL,yL,10,0,2*Math.PI);
+ctx.fill();
+yL=yL-0.1;
+if(yL<113){
+iL++;
+ctx.clearRect(39,100,22,30);
+var iLinterval = setInterval(function(){
+count=count - 10+Math.random()*10;
+if(count<0){
+iL=0;
+xL = 50;
+yL = 409;
+count = 1000;
+ctx.strokeStyle = "black";
+ctx.clearRect(39,105,22,30);
+ctx.rect(20,100,60,320);
+ctx.stroke();
+clearInterval(iLinterval);
+}
+},100);
+}
+}
+
+},1)
+	</script>
+	
+	</body>
+
+
+</html>
